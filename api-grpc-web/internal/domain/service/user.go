@@ -21,7 +21,7 @@ func NewUserService() UsersService {
 }
 
 func (UsersServiceImpl) FindUser(ctx context.Context, username string) (user model.User, err error) {
-	conn, err := grpc.Dial("localhost:9000", grpc.WithInsecure())
+	conn, err := grpc.Dial("api-user:9000", grpc.WithInsecure())
 	if err != nil {
 		return model.User{}, err
 	}

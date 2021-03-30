@@ -1,0 +1,29 @@
+version: '3.3'
+
+services:
+  api-user:
+    build:
+      context: ./api-grpc-user/
+      dockerfile: ./Dockerfile
+    container_name: api-user
+    environment:
+      port: "9000"
+    ports:
+      - "9000:9000"
+    networks:
+      - api-grpc-network
+
+  api-web:
+    build:
+      context: ./api-grpc-web/
+      dockerfile: ./Dockerfile
+    container_name: api-web
+    environment:
+      port: "8080"
+    ports:
+      - "8080:8080"
+    networks:
+      - api-grpc-network
+networks:
+  api-grpc-network:
+    driver: bridge

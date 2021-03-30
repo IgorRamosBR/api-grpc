@@ -8,18 +8,19 @@ import (
 	"google.golang.org/grpc/reflection"
 	"log"
 	"net"
+	"os"
 )
 
 func main() {
 	githubClient := client.CreateGithubClient()
 	userService := service.NewUserService(githubClient)
 
-
 	baseServer := grpc.NewServer()
 	proto.RegisterUserServiceServer(baseServer, userService)
 	reflection.Register(baseServer)
 
-	lis, err := net.Listen("tcp", ":9000")
+	port := os.Getenv("port")
+	lis, err := net.Listen("tcp", ":" + port)
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}

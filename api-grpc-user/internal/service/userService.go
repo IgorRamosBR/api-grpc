@@ -4,6 +4,7 @@ import (
 	"api-grpc-user/pkg/proto"
 	"context"
 	"github.com/google/go-github/v33/github"
+	"log"
 )
 
 type UserServiceImpl struct {
@@ -15,8 +16,10 @@ func NewUserService(client *github.Client) *UserServiceImpl {
 }
 
 func (s *UserServiceImpl) FindGithubUser(ctx context.Context, req *proto.UserRequest) (*proto.UserResponse, error) {
+	log.Print("Calling github")
 	user, _, err := s.Client.Users.Get(ctx, req.Username)
 	if err != nil {
+		log.Print(err)
 		return nil, err
 	}
 	return createUserResponse(user), nil
