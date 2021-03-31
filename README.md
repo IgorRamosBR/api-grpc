@@ -1,4 +1,4 @@
-# API gRPC Web
+# API gRPC
 
 ## Generating gRPC code
 
@@ -9,5 +9,7 @@
 `go get -u google.golang.org/grpc`
 
 ### Generating code
+
+`cd api-grpc-{project}`
 
 `protoc --go_out=plugins=grpc:. ./pkg/proto/users.proto`
